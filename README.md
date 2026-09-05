@@ -14,7 +14,7 @@ Desarrollada con el respaldo tecnológico institucional de **NEURA**.
 - **Semáforo Semanal de Ganancias**: Notificaciones claras que indican el estado financiero del negocio (verde, amarillo o rojo).
 - **Planes Transparentes**:
   - **Plan Gratis**: Registro básico, meta diaria y semáforo de ganancias.
-  - **Plan Premium (S/ 9.90/mes o S/ 3.50/semana)**: Pago fácil con Yape o Plin, cuaderno digital de fiados, comparativa semanal y reporte en PDF para bancos o cajas.
+  - **Plan Premium (S/ 14.90/mes o S/ 3.50/semana)**: Pago fácil con Yape o Plin, cuaderno digital de fiados, comparativa semanal y reporte en PDF para bancos o cajas.
 - **Contacto y Soporte Directo**: Acceso a asistencia personalizada vía WhatsApp al `+51 907 891 239`.
 
 ---
