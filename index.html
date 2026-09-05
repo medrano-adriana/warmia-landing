@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>WarmIA - Su Asesora Financiera de Confianza en WhatsApp</title>
+  <meta name="description" content="WarmIA es la asesora financiera por WhatsApp pensada para bodegueras y emprendedoras peruanas. Registre ventas y gastos por audio, revise su semáforo de ganancias y organice sus cuentas sin complicaciones.">
+  <meta name="theme-color" content="#128C7E">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/isotipo.svg">
+  <link rel="alternate icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#00685d",
+            "primary-container": "#008376",
+            "on-primary": "#ffffff",
+            "primary-fixed": "#8ff4e3",
+            "secondary": "#6e3aca",
+            "secondary-dark": "#5b21b6",
+            "secondary-fixed": "#ebddff",
+            "on-secondary-fixed": "#250059",
+            "tertiary": "#006b2e",
+            "tertiary-container": "#00873c",
+            "on-tertiary": "#ffffff",
+            "surface": "#f9f9ff",
+            "surface-low": "#f1f3ff",
+            "surface-card": "#ffffff",
+            "on-surface": "#141b2b",
+            "on-surface-variant": "#3d4946",
+            "wa-green": "#25D366",
+            "wa-dark": "#075E54",
+            "wa-light": "#d9fdd3",
+            "wa-chat-bg": "#efeae2"
+          },
+          fontFamily: {
+            sans: ["'Plus Jakarta Sans'", "system-ui", "-apple-system", "sans-serif"]
+          },
+          boxShadow: {
+            "card": "0 4px 16px -2px rgba(17, 24, 39, 0.06)",
+            "elevated": "0 10px 25px -4px rgba(0, 104, 93, 0.18)",
+            "purple": "0 10px 25px -4px rgba(110, 58, 202, 0.22)"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+      html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9ff;
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        color: #141b2b;
+      }
+      body {
+        background-image: radial-gradient(#bdc9c5 0.75px, transparent 0.75px);
+        background-size: 20px 20px;
+      }
+    }
+    .pb-safe {
+      padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    }
+    .pt-safe {
+      padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+    }
+    /* Touch target baseline rule */
+    .touch-btn {
+      min-height: 54px;
+    }
+    section[id] {
+      scroll-margin-top: 5.5rem;
+    }
+  </style>
+</head>
+
+<body class="bg-surface text-on-surface flex flex-col min-h-screen items-center">
+
+  <!-- WRAPPER PRINCIPAL (Optimizado Mobile-First, max-w-lg centrado en pantallas grandes) -->
+  <div class="w-full max-w-md md:max-w-lg min-h-screen flex flex-col bg-surface shadow-2xl relative">
+
+    <!-- CABECERA SUPERIOR FIJA -->
+    <header class="fixed top-0 inset-x-0 z-50 pt-safe bg-surface/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] max-w-md md:max-w-lg mx-auto">
+      <!-- Cintillo Institucional NEURA -->
+      <div class="bg-secondary-dark text-white px-4 py-1.5 flex items-center justify-between">
+        <span class="text-[12px] font-bold tracking-wide flex items-center gap-1">
+          <span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+          Un desarrollo de NEURA
+        </span>
+        <span class="text-[11px] font-semibold bg-white/15 px-2 py-0.5 rounded-full flex items-center gap-1">
+          <span class="material-symbols-outlined text-[13px]">lock</span>
+          IA Segura
+        </span>
+      </div>
+
+      <!-- Barra de navegación con logo y botón WhatsApp -->
+      <div class="h-16 px-4 flex items-center justify-between gap-2 border-b border-gray-100">
+        <a href="#inicio" class="flex items-center gap-2.5">
+          <img src="assets/isotipo.svg" alt="Logo WarmIA" class="h-9 w-9 object-contain">
+          <div class="flex flex-col">
+            <span class="text-[18px] font-extrabold text-on-surface leading-tight tracking-tight">Warm<span class="text-primary">IA</span></span>
+            <span class="text-[11px] text-on-surface-variant font-semibold uppercase tracking-wider">Asesora en WhatsApp</span>
+          </div>
+        </a>
+
+        <!-- Botón rápido a WhatsApp -->
+        <a href="https://wa.me/51999267563?text=Hola%2C%20quiero%20probar%20WarmIA%20gratis" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="h-11 px-3.5 rounded-xl bg-tertiary-container hover:bg-tertiary text-white flex items-center gap-1.5 shadow-sm active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+          <span class="text-[13px] font-bold">WhatsApp</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 flex flex-col w-full px-4 pt-28 pb-28 gap-8">
+
+      <!-- ========================================== -->
+      <!-- SECCIÓN 1: INICIO / HERO -->
+      <!-- ========================================== -->
+      <section id="inicio" class="flex flex-col gap-4 pt-2">
+        
+        <!-- Badge de Respaldo Institucional -->
+        <div class="inline-flex items-center gap-2 self-start bg-secondary-fixed text-on-secondary-fixed px-3.5 py-1.5 rounded-full shadow-sm">
+          <span class="material-symbols-outlined text-[18px] text-secondary-dark" style="font-variation-settings: 'FILL' 1;">verified</span>
+          <span class="text-[12px] font-bold tracking-wide">Desarrollado con orgullo por NEURA</span>
+        </div>
+
+        <!-- Encabezado con Logo Completo Vectorial -->
+        <div class="flex items-center gap-2 pt-1">
+          <img src="assets/logo.svg" alt="WarmIA - Asesora en WhatsApp" class="h-12 w-auto object-contain">
+        </div>
+
+        <!-- Título Principal Empático -->
+        <h1 class="text-[28px] sm:text-[32px] font-extrabold text-on-surface leading-[1.25] tracking-tight">
+          Su asesora financiera de confianza, directo en su WhatsApp
+        </h1>
+
+        <!-- Párrafo Descriptivo Amigable (Trato de Usted) -->
+        <p class="text-[17px] text-on-surface-variant font-medium leading-relaxed">
+          Para saber al instante si su bodega o negocio va bien, sin papeles complicados ni cálculos difíciles. Solo envíe un mensaje o una nota de voz.
+        </p>
+
+        <!-- Contenedor Fotográfico Bodega con Simulación Conversacional WhatsApp -->
+        <div class="relative w-full rounded-2xl overflow-hidden shadow-card bg-surface-card flex flex-col border border-gray-100">
+          
+          <!-- Foto de doña Rosa en su bodega -->
+          <div class="relative w-full h-64 sm:h-72 overflow-hidden">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEPMqMG4oX_-SQMkU0F3pWc3CGbbsLUWeJJuirUgMAK-O8D4UIIrqiVG5pIxti3yNBMOmw9-dKxcyygI5quVMpCVjGmniphnnVmQ9v9gFB67v1lR7_Tux-Jb3d9BLSVTc_5YqcZEGKIcxY5wml_qRsREOBxM2u2jXnbuy3fQOGu6eQWk_9bz8N0adgaoMWGbT-nFjfuFrdNsqDH4j9gZ3Kug-h5WYdDAiA-rbyzh_CEkC-iTBNE0Yp" 
+                 alt="Dueña de bodega peruana sonriendo en su mostrador con productos" 
+                 class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-white">
+              <span class="material-symbols-outlined text-[20px] text-wa-green">storefront</span>
+              <span class="text-[13px] font-semibold">Doña Rosa, Bodega "El Carmen" — Lima</span>
+            </div>
+          </div>
+
+          <!-- Tarjeta Flotante Simulando WhatsApp -->
+          <div class="flex flex-col bg-wa-chat-bg border-t border-[#005c4b]/15">
+            <!-- Header WhatsApp chat -->
+            <div class="bg-[#005c4b] text-white px-3.5 py-2 flex items-center justify-between shadow-sm">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-full overflow-hidden bg-white shrink-0 flex items-center justify-center p-1 shadow-sm">
+                  <img src="assets/isotipo.svg" alt="WarmIA" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col leading-tight">
+                  <span class="font-bold text-[15px] text-white tracking-wide">WarmIA</span>
+                  <span class="text-[11px] text-[#25D366] font-medium flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-[#25D366] inline-block animate-pulse"></span>
+                    en línea
+                  </span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 text-white/90">
+                <span class="material-symbols-outlined text-[20px]">videocam</span>
+                <span class="material-symbols-outlined text-[20px]">call</span>
+                <span class="material-symbols-outlined text-[20px]">more_vert</span>
+              </div>
+            </div>
+
+            <!-- Chat messages container -->
+            <div class="p-3.5 flex flex-col gap-2.5 relative" style="background-image: radial-gradient(#d1c7b7 0.75px, transparent 0.75px); background-size: 16px 16px;">
+              
+              <!-- Audio de Doña Rosa -->
+              <div class="self-end max-w-[88%] bg-wa-light text-[#111b21] rounded-xl rounded-tr-none px-3 py-2 shadow-sm flex flex-col gap-1.5 text-left">
+                <div class="flex items-center gap-2.5">
+                  <div class="relative shrink-0">
+                    <div class="w-9 h-9 rounded-full bg-[#005c4b] text-white flex items-center justify-center shadow-sm">
+                      <span class="material-symbols-outlined text-[20px] ml-0.5" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#53bdeb] text-white flex items-center justify-center">
+                      <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">mic</span>
+                    </div>
+                  </div>
+                  <div class="flex-1 flex flex-col gap-1">
+                    <!-- Ondas de voz -->
+                    <div class="flex items-center gap-0.5 h-6">
+                      <span class="w-0.5 h-2 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-3.5 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-5 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-3 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-4.5 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-2.5 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-5 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-4 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-2 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-5 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-3 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-4 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-2 bg-[#005c4b] rounded-full"></span>
+                      <span class="w-0.5 h-3 bg-[#667781]/40 rounded-full"></span>
+                      <span class="w-0.5 h-5 bg-[#667781]/40 rounded-full"></span>
+                      <span class="w-0.5 h-3.5 bg-[#667781]/40 rounded-full"></span>
+                    </div>
+                    <div class="flex items-center justify-between text-[11px] text-[#667781] leading-none">
+                      <span class="font-medium text-[#111b21]">0:12</span>
+                      <div class="flex items-center gap-1">
+                        <span>11:42 a. m.</span>
+                        <span class="material-symbols-outlined text-[15px] text-[#53bdeb]" style="font-variation-settings: 'FILL' 1;">done_all</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-1 border-t border-[#005c4b]/10 flex items-center gap-1 text-[12px] text-[#3d4946]">
+                  <span class="material-symbols-outlined text-[14px] text-primary">transcribe</span>
+                  <span class="italic">"vendí 120 soles en gaseosas"</span>
+                </div>
+              </div>
+
+              <!-- Respuesta WarmIA 1 -->
+              <div class="self-start max-w-[88%] bg-white text-[#111b21] rounded-xl rounded-tl-none px-3.5 py-2 shadow-sm flex flex-col gap-0.5 text-left">
+                <p class="text-[14px] leading-snug font-medium text-on-surface">Anotado: vendiste S/120 en gaseosas ✅</p>
+                <div class="flex items-center justify-end text-[10px] text-[#667781] leading-none">
+                  <span>11:42 a. m.</span>
+                </div>
+              </div>
+
+              <!-- Respuesta WarmIA 2 (Semáforo) -->
+              <div class="self-start max-w-[88%] bg-white text-[#111b21] rounded-xl rounded-tl-none px-3.5 py-2 shadow-sm flex flex-col gap-0.5 text-left border-l-4 border-tertiary-container">
+                <p class="text-[14px] leading-snug font-bold text-tertiary">🟢 Esta semana vas en verde</p>
+                <div class="flex items-center justify-end text-[10px] text-[#667781] leading-none">
+                  <span>11:42 a. m.</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Barra de Íconos de Bodega -->
+          <div class="grid grid-cols-4 gap-2 p-3 bg-surface-low/80">
+            <div class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white shadow-xs text-center">
+              <span class="material-symbols-outlined text-[24px] text-primary">inventory_2</span>
+              <span class="text-[12px] text-on-surface font-semibold">Abarrotes</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white shadow-xs text-center">
+              <span class="material-symbols-outlined text-[24px] text-tertiary">menu_book</span>
+              <span class="text-[12px] text-on-surface font-semibold">Cuaderno</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white shadow-xs text-center">
+              <span class="material-symbols-outlined text-[24px] text-secondary">payments</span>
+              <span class="text-[12px] text-on-surface font-semibold">Monedas</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 p-2 rounded-xl bg-white shadow-xs text-center">
+              <span class="material-symbols-outlined text-[24px] text-primary-container">shopping_bag</span>
+              <span class="text-[12px] text-on-surface font-semibold">Compras</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón Principal "Probar gratis" (Requisito Funcional 1) -->
+        <a href="https://wa.me/51999267563?text=Hola%2C%20quiero%20probar%20WarmIA%20gratis" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="touch-btn w-full bg-tertiary-container hover:bg-tertiary text-white rounded-2xl px-5 py-3.5 flex items-center justify-between shadow-elevated active:scale-[0.98] transition-transform">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+            <span class="text-[17px] font-extrabold tracking-wide">Probar gratis en WhatsApp</span>
+          </div>
+          <span class="material-symbols-outlined text-[24px]">arrow_forward</span>
+        </a>
+
+        <p class="text-[13px] text-center text-on-surface-variant font-medium">
+          Sin contraseñas raras • Activación en menos de 1 minuto
+        </p>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECCIÓN 2: NUESTRO PROPÓSITO -->
+      <!-- ========================================== -->
+      <section id="proposito" class="w-full">
+        <div class="bg-surface-card rounded-2xl p-5 shadow-card flex flex-col gap-3.5 border border-gray-100">
+          <div class="flex items-center gap-2 text-secondary-dark">
+            <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+            <span class="text-[13px] font-bold uppercase tracking-wider">Nuestro Propósito</span>
+          </div>
+          <h2 class="text-[22px] font-bold text-on-surface leading-tight">
+            Pensado especialmente para usted y el esfuerzo de su negocio
+          </h2>
+          <p class="text-[16px] text-on-surface-variant leading-relaxed">
+            Sabemos lo agotador que es atender su bodega desde las 6 de la mañana hasta la noche. WarmIA nació para que usted no tenga que lidiar con sistemas complicados ni computadoras. Funciona en el WhatsApp que ya sabe usar, como si tuviera a su lado a una persona experta que cuida sus cuentas con paciencia y respeto.
+          </p>
+          <div class="flex items-center gap-3 pt-2 border-t border-gray-100">
+            <div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-bold shrink-0">
+              <span class="material-symbols-outlined text-[22px]">shield_person</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[14px] font-bold text-on-surface">Cuidado y discreción total</span>
+              <span class="text-[12px] text-on-surface-variant">Sus datos de ventas le pertenecen solo a usted</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECCIÓN 3: ¿CÓMO LE AYUDA? (BENEFICIOS) -->
+      <!-- ========================================== -->
+      <section id="beneficios" class="flex flex-col gap-3 w-full">
+        <div class="flex flex-col gap-1">
+          <h2 class="text-[24px] font-extrabold text-on-surface leading-tight">
+            ¿Cómo le ayuda WarmIA en su día a día?
+          </h2>
+          <p class="text-[16px] text-on-surface-variant font-medium">
+            Todo fácil, rápido y sin rodeos:
+          </p>
+        </div>
+
+        <!-- 4 Bloques de Beneficios -->
+        <div class="flex flex-col gap-3 w-full">
+          
+          <!-- a) Semáforo Semanal -->
+          <div class="bg-surface-card rounded-2xl p-4 shadow-card flex items-start gap-4 border border-gray-100">
+            <div class="w-13 h-13 p-3 rounded-2xl bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">traffic</span>
+            </div>
+            <div class="flex flex-col gap-1 min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+                <h3 class="text-[18px] text-on-surface font-bold">Semáforo Semanal</h3>
+              </div>
+              <p class="text-[15px] text-on-surface-variant leading-relaxed">
+                Una luz verde, amarilla o roja que le avisa de un solo vistazo si su semana va con buena ganancia o si hay que ajustar gastos a tiempo.
+              </p>
+            </div>
+          </div>
+
+          <!-- b) Anote por Audio o Texto -->
+          <div class="bg-surface-card rounded-2xl p-4 shadow-card flex items-start gap-4 border border-gray-100">
+            <div class="w-13 h-13 p-3 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">mic</span>
+            </div>
+            <div class="flex flex-col gap-1 min-w-0">
+              <h3 class="text-[18px] text-on-surface font-bold">Anote todo por Audio o Texto</h3>
+              <p class="text-[15px] text-on-surface-variant leading-relaxed">
+                Solo mande un audio como si le hablara a una amiga de confianza: <em class="text-on-surface font-medium">"vendí 3 sacos de arroz"</em>. WarmIA lo suma automáticamente en un segundo.
+              </p>
+            </div>
+          </div>
+
+          <!-- c) Su Meta de Venta Diaria -->
+          <div class="bg-surface-card rounded-2xl p-4 shadow-card flex items-start gap-4 border border-gray-100">
+            <div class="w-13 h-13 p-3 rounded-2xl bg-secondary/10 text-secondary-dark flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">flag</span>
+            </div>
+            <div class="flex flex-col gap-1 min-w-0">
+              <h3 class="text-[18px] text-on-surface font-bold">Su Meta de Venta Diaria</h3>
+              <p class="text-[15px] text-on-surface-variant leading-relaxed">
+                Cada mañana le recuerda con cariño cuánto necesita vender hoy para cumplir sus metas del mes y pagar a sus proveedores sin sobresaltos.
+              </p>
+            </div>
+          </div>
+
+          <!-- d) Consejos Prácticos -->
+          <div class="bg-surface-card rounded-2xl p-4 shadow-card flex items-start gap-4 border border-gray-100">
+            <div class="w-13 h-13 p-3 rounded-2xl bg-primary-container/15 text-primary-container flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[30px]" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+            </div>
+            <div class="flex flex-col gap-1 min-w-0">
+              <h3 class="text-[18px] text-on-surface font-bold">Consejos para su Bodega</h3>
+              <p class="text-[15px] text-on-surface-variant leading-relaxed">
+                Consejos útiles en palabras sencillas para no quedarse con mercadería parada, pedir mejor a distribuidores y ganar más cada semana.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECCIÓN 4: PLANES (GRATIS Y PREMIUM) -->
+      <!-- ========================================== -->
+      <section id="planes" class="flex flex-col gap-4 w-full">
+        <div class="flex flex-col gap-1">
+          <h2 class="text-[24px] font-extrabold text-on-surface leading-tight">
+            Planes sencillos, pensados para su bolsillo
+          </h2>
+          <p class="text-[16px] text-on-surface-variant">
+            Elija la opción que mejor se acomode a su ritmo diario:
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-5 w-full">
+          
+          <!-- TARJETA 1: PLAN GRATIS -->
+          <div class="bg-surface-card rounded-2xl p-5 shadow-card flex flex-col gap-3.5 border border-gray-200 relative">
+            <div class="inline-flex self-start px-3 py-1 rounded-full bg-surface-low text-on-surface text-[12px] font-bold">
+              Para empezar hoy mismo
+            </div>
+            <div>
+              <h3 class="text-[22px] font-bold text-on-surface">Plan Gratis</h3>
+              <div class="flex items-baseline gap-1 mt-1">
+                <span class="text-[32px] font-extrabold text-on-surface">S/ 0</span>
+                <span class="text-[15px] text-on-surface-variant font-medium">/ gratis para siempre</span>
+              </div>
+            </div>
+
+            <!-- Lista de características Plan Gratis -->
+            <ul class="flex flex-col gap-2.5 pt-2 border-t border-gray-100 text-[15px]">
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Semáforo semanal: le dice de un vistazo si va bien o mal</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Registro de ventas y gastos por audio o mensaje</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Meta de venta de cada día</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Reporte mensual con consejos para su negocio</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Aviso si su proveedor le sube un precio</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Registro de pérdidas (vencido, roto, etc.)</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Aviso antes de que venzan sus productos</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Sugerencia de qué abastecerse</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-tertiary shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <span class="text-on-surface">Racha de buenas semanas</span>
+              </li>
+            </ul>
+
+            <!-- Botón Plan Gratis -->
+            <a href="https://wa.me/51999267563?text=Hola%2C%20quiero%20probar%20WarmIA%20gratis" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="touch-btn w-full bg-surface-low hover:bg-gray-200 text-on-surface rounded-2xl px-4 py-3 flex items-center justify-center gap-2 text-[16px] font-bold shadow-sm active:scale-[0.98] transition-all mt-2">
+              <span>Empezar Gratis</span>
+              <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- TARJETA 2: PLAN PREMIUM (DESTACADA) -->
+          <div class="bg-surface-card rounded-2xl p-5 shadow-purple flex flex-col gap-3.5 border-2 border-secondary-dark relative overflow-hidden">
+            <!-- Cinta destacada superior -->
+            <div class="inline-flex self-start px-3.5 py-1 rounded-full bg-secondary-dark text-white text-[12px] font-bold shadow-sm">
+              ⭐ El más completo para crecer
+            </div>
+
+            <div>
+              <h3 class="text-[24px] font-extrabold text-on-surface">Plan Premium</h3>
+              <div class="flex items-baseline gap-1 mt-1">
+                <span class="text-[34px] font-extrabold text-secondary-dark">S/ 9.90</span>
+                <span class="text-[16px] text-on-surface-variant font-semibold">al mes</span>
+              </div>
+              <span class="text-[14px] text-on-surface-variant font-medium">o solo <strong class="text-on-surface">S/ 3.50</strong> por semana</span>
+            </div>
+
+            <!-- Métodos de pago peruanos (Yape / Plin) -->
+            <div class="bg-secondary-fixed/60 rounded-xl p-3 flex items-center justify-between border border-secondary/20">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[24px] text-secondary-dark">smartphone</span>
+                <span class="text-[14px] font-bold text-on-secondary-fixed">Pago fácil con Yape o Plin</span>
+              </div>
+              <span class="text-[12px] font-bold text-secondary-dark bg-white px-2 py-0.5 rounded-full shadow-xs">Sin tarjetas</span>
+            </div>
+
+            <p class="text-[15px] font-bold text-on-surface pt-1 border-t border-gray-100">
+              Incluye todo lo del Plan Gratis, MÁS:
+            </p>
+
+            <!-- Lista características Premium -->
+            <ul class="flex flex-col gap-2.5 text-[15px]">
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-secondary-dark shrink-0" style="font-variation-settings: 'FILL' 1;">stars</span>
+                <span class="text-on-surface"><strong class="font-bold">Cuaderno digital de Fiados:</strong> sepa quién le debe y cuánto sin perder clientes ni dinero.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-secondary-dark shrink-0" style="font-variation-settings: 'FILL' 1;">stars</span>
+                <span class="text-on-surface"><strong class="font-bold">Tendencia semana a semana:</strong> compara sus ventas de esta semana con la anterior y le dice si va mejorando.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-secondary-dark shrink-0" style="font-variation-settings: 'FILL' 1;">stars</span>
+                <span class="text-on-surface"><strong class="font-bold">Racha de buenas semanas:</strong> para celebrar su progreso y cuidar su esfuerzo.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[20px] text-secondary-dark shrink-0" style="font-variation-settings: 'FILL' 1;">stars</span>
+                <span class="text-on-surface"><strong class="font-bold">Reporte en PDF listo para Bancos o Cajas:</strong> demuestre sus ventas formales para pedir préstamos.</span>
+              </li>
+            </ul>
+
+            <!-- Botón Activar Premium -->
+            <a href="https://wa.me/51907891239" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="touch-btn w-full bg-secondary-dark hover:bg-secondary text-white rounded-2xl px-4 py-3 flex items-center justify-between text-[16px] font-bold shadow-lg active:scale-[0.98] transition-all mt-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[24px]">workspace_premium</span>
+                <span>Activar Premium por WhatsApp</span>
+              </div>
+              <span class="material-symbols-outlined text-[22px]">arrow_forward</span>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECCIÓN 5: CÓMO EMPEZAR (3 PASOS FÁCILES) -->
+      <!-- ========================================== -->
+      <section id="como-funciona" class="w-full bg-surface-card rounded-2xl p-5 shadow-card flex flex-col gap-4 border border-gray-100">
+        <div class="flex flex-col gap-1">
+          <span class="text-[13px] font-bold uppercase tracking-wider text-primary">Es muy sencillo</span>
+          <h2 class="text-[24px] font-extrabold text-on-surface leading-tight">
+            ¿Cómo empezar a usar WarmIA?
+          </h2>
+          <p class="text-[15px] text-on-surface-variant leading-relaxed">
+            No necesita instalar ninguna aplicación pesada. Solo tres toques en su teléfono:
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-4 pt-1">
+          <!-- Paso 1 -->
+          <div class="flex items-start gap-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-tertiary-container text-white flex items-center justify-center text-[19px] font-extrabold shrink-0 shadow-sm">
+              1
+            </div>
+            <div class="flex flex-col min-w-0">
+              <h3 class="text-[17px] text-on-surface font-bold">Escríbanos un "Hola" por WhatsApp</h3>
+              <p class="text-[15px] text-on-surface-variant leading-relaxed">
+                Toque cualquiera de los botones verdes. Se abrirá su WhatsApp de siempre sin tener que descargar nada nuevo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="flex items-start gap-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-primary text-white flex items-center justify-center text-[19px] font-extrabold shrink-0 shadow-sm">
+              2
+            </div>
+            <div class="flex flex-col min-w-0">
+              <h3 class="text-[17px] text-on-surface font-bold">Cuéntenos el nombre de su bodega</h3>
+              <p class="text-[15px] text-on-surface-variant leading-relaxed">
+                Le tomamos sus datos con paciencia y respeto en solo un minuto para personalizar sus cuentas.
+              </p>
+            </div>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="flex items-start gap-3.5">
+            <div class="w-11 h-11 rounded-2xl bg-secondary-dark text-white flex items-center justify-center text-[19px] font-extrabold shrink-0 shadow-sm">
+              3
+            </div>
+            <div class="flex flex-col min-w-0">
+              <h3 class="text-[17px] text-on-surface font-bold">Empiece a mandar sus ventas por audio</h3>
+              <p class="text-[15px] text-on-surface-variant leading-relaxed">
+                Diga en voz alta lo que cobró o pagó. WarmIA se encarga de todo el orden y la suma por usted.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECCIÓN 6: CONTACTO DIRECTO (Requisito Funcional 2) -->
+      <!-- ========================================== -->
+      <section id="contacto" class="w-full">
+        <div class="bg-surface-card rounded-2xl p-6 shadow-card flex flex-col gap-4 text-center items-center border border-gray-200">
+          <div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed shadow-sm">
+            <span class="material-symbols-outlined text-[32px] text-primary">support_agent</span>
+          </div>
+
+          <h2 class="text-[22px] font-bold text-on-surface leading-snug">
+            ¿Tiene alguna duda o le cuesta empezar?
+          </h2>
+
+          <p class="text-[16px] text-on-surface-variant max-w-sm leading-relaxed">
+            Estamos para atenderle y guiarle paso a paso con gusto. No está sola en el manejo de su negocio.
+          </p>
+
+          <!-- Botón de Contacto Directo con Número Claro (Requisito 2) -->
+          <a href="https://wa.me/51907891239" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="touch-btn w-full bg-tertiary-container hover:bg-tertiary text-white rounded-2xl px-5 py-3.5 flex items-center justify-center gap-3 text-[16px] font-bold shadow-elevated active:scale-[0.98] transition-transform">
+            <span class="material-symbols-outlined text-[26px]">call</span>
+            <span>Llamar o escribir al +51 907 891 239</span>
+          </a>
+
+          <span class="text-[13px] text-on-surface-variant font-medium">
+            Atención de lunes a domingo de 7:00 a.m. a 9:00 p.m.
+          </span>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECCIÓN 7: RESPALDO INSTITUCIONAL NEURA -->
+      <!-- ========================================== -->
+      <section id="neura" class="w-full bg-surface-card rounded-2xl p-5 shadow-card flex flex-col gap-3 border border-gray-100">
+        <div class="flex items-center gap-2 text-secondary-dark">
+          <span class="material-symbols-outlined text-[24px]">verified_user</span>
+          <span class="text-[14px] font-bold">Tecnología Protegida y Confiable</span>
+        </div>
+        <p class="text-[15px] text-on-surface-variant leading-relaxed">
+          WarmIA es desarrollada con rigurosos estándares por <strong class="text-on-surface font-bold">NEURA</strong>. Nuestra inteligencia artificial respeta la privacidad de las familias peruanas y nunca comparte sus números de venta con extraños ni entidades tributarias.
+        </p>
+        <div class="pt-2 flex items-center justify-between text-on-surface-variant border-t border-gray-100">
+          <span class="text-[12px] font-semibold">© 2025 WarmIA • NEURA</span>
+          <span class="text-[12px] font-semibold bg-surface-low px-2.5 py-1 rounded-full">Perú 🇵🇪</span>
+        </div>
+      </section>
+
+      <!-- PIE DE PÁGINA (FOOTER) -->
+      <footer class="w-full pt-4 pb-12 flex flex-col gap-3 text-center">
+        <div class="flex items-center justify-center gap-2">
+          <span class="text-[14px] font-bold text-on-surface">WarmIA es desarrollada por NEURA</span>
+        </div>
+        <p class="text-[13px] text-on-surface-variant max-w-xs mx-auto leading-relaxed">
+          Tecnología de acompañamiento financiero para bodegas y emprendedoras peruanas con seguridad de grado institucional.
+        </p>
+        <div class="flex justify-center items-center gap-4 pt-1">
+          <a href="#contacto" class="text-[13px] text-primary font-bold">Canales de Ayuda</a>
+          <span class="text-gray-300">•</span>
+          <a href="https://wa.me/51999267563?text=Hola%2C%20quiero%20probar%20WarmIA%20gratis" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="text-[13px] text-tertiary font-bold flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px]">forum</span>
+            WhatsApp Oficial
+          </a>
+        </div>
+      </footer>
+
+    </main>
+
+    <!-- BARRA INFERIOR DE NAVEGACIÓN FIJA (Mobile Bottom Nav Bar) -->
+    <nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-white/95 backdrop-blur-xl border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] max-w-md md:max-w-lg mx-auto">
+      <div class="flex justify-around items-center h-16 px-2">
+        <a href="#inicio" class="nav-item flex flex-col items-center justify-center gap-0.5 min-w-[54px] min-h-[54px] transition-all text-primary font-bold">
+          <span class="material-symbols-outlined text-[24px]">storefront</span>
+          <span class="text-[11px]">Inicio</span>
+        </a>
+        <a href="#como-funciona" class="nav-item flex flex-col items-center justify-center gap-0.5 min-w-[54px] min-h-[54px] transition-all text-on-surface-variant hover:text-primary">
+          <span class="material-symbols-outlined text-[24px]">question_answer</span>
+          <span class="text-[11px]">Pasos</span>
+        </a>
+        <a href="#beneficios" class="nav-item flex flex-col items-center justify-center gap-0.5 min-w-[54px] min-h-[54px] transition-all text-on-surface-variant hover:text-primary">
+          <span class="material-symbols-outlined text-[24px]">verified</span>
+          <span class="text-[11px]">Beneficios</span>
+        </a>
+        <a href="#planes" class="nav-item flex flex-col items-center justify-center gap-0.5 min-w-[54px] min-h-[54px] transition-all text-on-surface-variant hover:text-primary">
+          <span class="material-symbols-outlined text-[24px]">payments</span>
+          <span class="text-[11px]">Planes</span>
+        </a>
+        <a href="#contacto" class="nav-item flex flex-col items-center justify-center gap-0.5 min-w-[54px] min-h-[54px] transition-all text-on-surface-variant hover:text-primary">
+          <span class="material-symbols-outlined text-[24px]">support_agent</span>
+          <span class="text-[11px]">Contacto</span>
+        </a>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- SCRIPT PARA NAVEGACIÓN ACTIVA -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-item');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 120;
+          if (pageYOffset >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href').replace('#', '');
+          if (href === current) {
+            link.classList.add('text-primary', 'font-bold');
+            link.classList.remove('text-on-surface-variant');
+          } else {
+            link.classList.remove('text-primary', 'font-bold');
+            link.classList.add('text-on-surface-variant');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
